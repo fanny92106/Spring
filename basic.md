@@ -64,10 +64,13 @@ IOC:
     - 控制反转: 
         改变了资源的获取方向 -- 改由容器主动地将资源推送给需要的组件，开发人员buxuyao9知道容器是如何创建资源对象的，只需要提供接收资源的方式即可，极大地降低了学习成本，提高了开发效率
     
+    - 大白话版: 把程序员er对一个对象的管理权反转给程序本身 (尚硅谷)
+    
+DI:  (Injection = 赋值)
 
-DI: 
-
-    - 具体的依赖注入的方式, eg: setter()
+    - 把有依赖关系的属性进行赋值，eg: setter()
+    
+    - 大白话版: 给bean的属性赋值 (尚硅谷)
     
     
     
@@ -93,5 +96,50 @@ DI:
     - FileSystemXmlApplicationContext: 对应文件系统中的xml格式的配置文件，使用的是绝对路径
     
     
+
+7. 依赖注入的方式
+
+### setter injection
+    
+![setterInjection](imagePool/setterInjection.png)
+    
+### constructor injection (rarely use)
+
+![constructorInjection](imagePool/constructorInjection.png)
+
+
+
+
+8. 可以注入的值
+
+### 字面量 -- 使用 value 来赋值
+
+        - 可以使用字符串表示的值，可以通过value 属性或 value 子节点的方式指定
+![valueSubNode](imagePool/valueSubNode.png)
+
+        - 8种基本数据类型及其封装类，String等类型都可以用采用字面值注入的方式
+    
+    
+### 非字面量/类型 -- 使用 ref 来赋值
+
+        - ref 代表 配置文件中spring 管理某个 bean id
+![refInjection](imagePool/refInjection.png)
+
+        - 定义内部bean ref, 只能供当前bean 使用，不能被外部其他bean引用
+![refInternalBeanInjection](imagePool/refInternalBeanInjection.png)        
+
+
+
+### 集合的赋值
+    
+        - List<String>        
+![listInjection](imagePool/listInjection.png)        
+
+        - List<Student>
+![listClassTypeInjection](imagePool/listClassTypeInjection.png)
+        
+        - Map<String, String>
+![mapInjection](imagePool/mapInjection.png)
+
 
 
