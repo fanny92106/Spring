@@ -33,7 +33,10 @@
         - com.springsource.net.sf.cglib-2.1.3.jar
 
 
-3. 编写切面 -- AspectJ
+3. 编写切面 -- AspectJ (annotation)
+
+         - AspectJ config
+![AspectJConfig](imagePool/AspectJConfig.png)
 
 ![AopLingo](imagePool/AopLingo.png)
 
@@ -51,3 +54,14 @@
 
         - 环绕通知
 ![AopAroundAdvice](imagePool/AopAroundAdvice.png)
+
+
+4. 定义公共切入点
+
+![PointCutAnnotation](imagePool/PointCutAnnotation.png)
+
+
+5. 设置切面作用的优先级
+    
+        - @Order(val)  值越小优先级越高
+![AspectOrder](imagePool/AspectOrder.png)
