@@ -38,6 +38,42 @@
             解决的问题: 脏读
         - REPEATABLE READ (可重复读): 确保事务可以多次从一个字段中读取相同的值，在这个事务持续期间，禁止其他事务对这个字段进行更新
             解决的问题: 脏读，不可重复读
-        - SERIALIZABLE (串行化): 确保事务可以从一个表中读取相同的行，在这个事务持续期间，禁止其他事务对该表执行插入，更新和删除操作，所有并发的问题都可以避免，但性能十分低下
+        - SERIALIZABLE (串行化/单线程): 确保事务可以从一个表中读取相同的行，在这个事务持续期间，禁止其他事务对该表执行插入，更新和删除操作，所有并发的问题都可以避免，但性能十分低下
             解决的问题: 脏读，不可重复读， 幻读
+            
+            
+4. Spring中操作 Transaction事务
 
+        1). jars
+            - spring-tx-5.3.3.jar
+            - spring-jdbc-5.3.3.jar
+            - spring-orm-5.3.3.jar
+            - com.springsource.net.sf.cglib-2.1.3.jar
+            - com.springsource.org.aopalliance-1.0.0.jar
+            - com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar
+            
+        2). Spring配置文件
+![springTransactionConfig](imagePool/springTransactionConfig.png)
+
+       3). add @Transactional in service layer
+![@TransactionalOnMethod](imagePool/@TransactionalOnMethod.png)
+
+
+5. @Transactional 注解的属性设置
+
+        1). propagation(事务的传播行为):
+            A方法和B方法都有事务, 当A在调用B时, 会将A中的事务传播给B方法, B方法对事务的处理方式就是事务的传播行为 (父传播给子)
+            
+            - Propagation.REQUIRED: 被调用者使用调用者的事务(default), B用A的事务
+            - Propagation.REQUIRES_NEW:  被调用者不使用调用者的事务(挂起), 而使用自己定义的事务处理, 而没有被传播, B用B的事务
+            - ..其他
+![TransactionParent](imagePool/TransactionParent.png)            
+![TransactionChild](imagePool/TransactionChild.png)
+            
+        2). isolation(隔离级别): 在并发情况下操作数据的一种规定
+           - 读未提交/读已提交/可重复读/串行化
+           
+        3). timeout(超时): 在事务强制回滚前最多可以等待的时间
+        4). readOnly(只读): 指定当前事务中的一系列的操作是否为只读, 若设置为只读, 
+            mySQL就会在请求访问数据的时候不加锁, 来提高性能; 如果有写操作一定不要设置!
+        5). rollbackFor | rollbackForClassName | noRollbackFor | noRollbackForClassName: 设置因什么而回滚, 或不因什么而回滚
