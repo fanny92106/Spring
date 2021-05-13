@@ -75,3 +75,29 @@
 
        获取FactoryBean本身
 ![getFactoryBean](imagePool/annotation-driven/getFactoryBean.png)
+
+
+7. @Bean Life Cycle Methods
+
+        method_1: @Bean(initMethod, destroyMethod)
+![beanLifeCycleMethod](imagePool/annotation-driven/beanAnnotationLifeCycleMethod.png)
+
+       method_2: 实现InitializingBean, DisposableBean接口
+![InitializingBeanDisposableBean](imagePool/annotation-driven/implementInitializingBeanDisposableBean.png)
+    
+       method_3: 
+            @PostContruct: 在bean创建完成并且属性赋值完成来执行初始化方法
+            @PreDestroy: 在容器销毁bean之前执行一些清理工作
+![postConstructPreDestroy](imagePool/annotation-driven/postConstructPreDestroy.png)
+
+       method_4: BeanPostProcessor
+            postProcessBeforeInitialization: 在bean初始化之前的后置工作
+            postProcessAfterInitialization: 在bean初始化之后的后置工作
+![beanPostProcessor](imagePool/annotation-driven/beanPostProcessor.png)
+
+
+
+    扩展: BeanPostProcessor工作原理:
+    
+    
+
