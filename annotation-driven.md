@@ -96,8 +96,19 @@
 ![beanPostProcessor](imagePool/annotation-driven/beanPostProcessor.png)
 
 
-
-    扩展: BeanPostProcessor工作原理:
+8. @Value, @PropertySource
     
+        - 基本数值
+        - SpEL: #{} spring expression
+        - ${}: 取出配置文件中的值, 使用@PropertySource在配置文件中引入属性.properties文件
+
+编辑属性文件
+![propertiesFile](imagePool/annotation-driven/propertiesFile.png)
+
+将属性文件引入到配置文件
+![propertySourceAnnotation](imagePool/annotation-driven/propertySourceAnnotation.png)
+
+赋值属性文件中的值
+![valueAnnotation](imagePool/annotation-driven/valueAnnotation.png)
     
 
