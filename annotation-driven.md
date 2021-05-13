@@ -59,3 +59,19 @@
        ImportBeanDefinitionRegistrar: 根据条件手工注册bean
 ![importBeanDefRegistrar](imagePool/annotation-driven/importBeanDefRegistrar.png)
 ![manualRegisterBean](imagePool/annotation-driven/manualRegisterBean.png)
+
+
+6. FactoryBean<T>
+
+        - 容器中的bean是getObject()返回的对象, 虽然在配置文件注册的是FactoryBean
+        - 若想获取FactoryBean对象本身, 添加&符号
+        - spring与其他框架整合时常用
+
+        定义一个类实现FactoryBean接口
+![FactoryBeanDefine](imagePool/annotation-driven/FactoryBeanDefine.png)
+        
+       在@Configuration配置文件中注册FactoryBean
+![FactoryBeanConfig](imagePool/annotation-driven/FactoryBeanConfig.png)
+
+       获取FactoryBean本身
+![getFactoryBean](imagePool/annotation-driven/getFactoryBean.png)
