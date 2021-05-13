@@ -4,13 +4,13 @@
 1. @Configuration, @Bean, AnnotationConfigApplicationContext
     
         a. bean
-    ![javaBean](imagePool/annotation-driven/javaBean.png)
+![javaBean](imagePool/annotation-driven/javaBean.png)
     
         b. config class
-    ![configClass](imagePool/annotation-driven/configClass.png)
+![configClass](imagePool/annotation-driven/configClass.png)
 
         c. annotationConfigApplicationContext
-    ![annotationAC](imagePool/annotation-driven/annotationAC.png)
+![annotationAC](imagePool/annotation-driven/annotationAC.png)
 
 
 2. @ComponentScan, includeFilters, Filter, FilterType
@@ -42,5 +42,20 @@
         
         条件性地向IOC容器中引入bean
 ![conditionalAnnotation](imagePool/annotation-driven/conditionalAnnotation.pnga)
+        
+        customize Condition:
 ![customizeCondition](imagePool/annotation-driven/customizeCondition.png)
 
+
+5. @Import
+        
+        向容器中快速导入一个通过简单无参数构造器创建的bean
+![importAnnotation](imagePool/annotation-driven/importAnnotation.png)
+        
+       ImportSelector: 导入多个bean (SpringBoot中常用！！！！！！！！！！)
+![ImportSelector](imagePool/annotation-driven/ImportSelector.png)
+![customizeImportSelector](imagePool/annotation-driven/customizeImportSelector.png)
+
+       ImportBeanDefinitionRegistrar: 根据条件手工注册bean
+![importBeanDefRegistrar](imagePool/annotation-driven/importBeanDefRegistrar.png)
+![manualRegisterBean](imagePool/annotation-driven/manualRegisterBean.png)
