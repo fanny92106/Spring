@@ -26,10 +26,21 @@
     ![customizeFilter](imagePool/annotation-driven/customizeFilter.png)
         
 
-3. @Scope
+3. @Scope, @Lazy
 
         a. default scope: singleton
         b. singleton: ioc容器启动时就会调动此方法将单实例创建到ioc容器中
         c. prototype: ioc容器启动时并不会去创建对象放到容器中, 而是在每次获取时才创建对象
 
 ![beanScope](imagePool/annotation-driven/beanScope.png)
+
+       配置单例bean懒加载: 只有在被调用时才被加载
+![lazyLoadSingletonBean](imagePool/annotation-driven/lazyLoadSingletonBean.png)
+
+
+4. @Conditional, customize condition
+        
+        条件性地向IOC容器中引入bean
+![conditionalAnnotation](imagePool/annotation-driven/conditionalAnnotation.pnga)
+![customizeCondition](imagePool/annotation-driven/customizeCondition.png)
+
