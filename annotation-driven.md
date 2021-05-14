@@ -110,5 +110,16 @@
 
 赋值属性文件中的值
 ![valueAnnotation](imagePool/annotation-driven/valueAnnotation.png)
-    
+
+
+9. @Autowired, @Resource, @Inject
+        
+        三个注解都支持自动装配:
+            - @Autowired: 由Spring定义, 首选
+            - @Resource: 由java定义, 默认是按组件名称进行装配;
+                         不支持@Primary功能, 以及required=false选项
+            - @Inject: 由java定义, 需要导入javax.injext包, 不支持require=false选项
+            
+
+10. 
 
