@@ -121,5 +121,9 @@
             - @Inject: 由java定义, 需要导入javax.injext包, 不支持require=false选项
             
 
-10. 
+10. xxxAware
+
+        - 自定义组件想要注入Spring容器底层的一些组件(ApplicationContext, BeanFactory, xxx);
+            自定义组件实现xxxAware接口, 在创建对象的时候, 会调用接口规定的方法注入相关组件
+![implementXxxAware](imagePool/annotation-driven/implementXxxAware)
 
