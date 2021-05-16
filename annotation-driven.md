@@ -127,3 +127,17 @@
             自定义组件实现xxxAware接口, 在创建对象的时候, 会调用接口规定的方法注入相关组件
 ![implementXxxAware](imagePool/annotation-driven/implementXxxAware)
 
+
+11. @Profile
+
+        - 根据当前的环境动态地切换一系列组件的功能, eg: dev, test, prod
+        
+        设置bean的不同环境Profile
+![profileAnnotation](imagePool/annotation-driven/profileAnnotation.png)
+        
+      设置环境1: 命令行VM动态参数
+![setProfileParameterByVMCmd](imagePool/annotation-driven/setProfileParameterByVMCmd.png)
+        
+      设置环境2: 代码方式, 分步设置容器环境+创建容器
+![setProfileParameterByAnnotationConstructor](imagePool/annotation-driven/setProfileParameterByAnnotationConstructor.png)
+
