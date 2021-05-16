@@ -1,5 +1,7 @@
 # Annotation-driven Spring Development
 
+## 容器注入bean
+
 
 1. @Configuration, @Bean, AnnotationConfigApplicationContext
     
@@ -141,3 +143,23 @@
       设置环境2: 代码方式, 分步设置容器环境+创建容器
 ![setProfileParameterByAnnotationConstructor](imagePool/annotation-driven/setProfileParameterByAnnotationConstructor.png)
 
+
+## AOP
+
+1. basic
+            
+        - @Aspect 指明切面类
+        - @Pointcut, @Before, @After, @AfterReturning, @AfterThrowing
+        - @EnableAspectJAutoProxy 启动基于注解的aop模式: aspectJ自动代理
+        
+        目标类
+![AopBasicTargetClass](imagePool/annotation-driven/AopBasicTargetClass.png)
+        
+        切面类 - 声明切面, 声明切入点表达式
+![AopBasicAspectClass](imagePool/annotation-driven/AopBasicAspectClass.png)        
+        
+        配置类 - 开启基于注解的aop模式
+![AopBasicConfigClass](imagePool/annotation-driven/AopBasicConfigClass.png)   
+        
+        运行测试类
+![AopBasicTestClass](imagePool/annotation-driven/AopBasicTestClass.png)   
