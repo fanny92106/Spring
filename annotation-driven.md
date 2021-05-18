@@ -177,3 +177,5 @@
 ![AnnotationAwareAspectJAutoProxyCreator](imagePool/annotation-driven/AnnotationAwareAspectJAutoProxyCreator.png)
         
         c. 代理对象(proxy)的执行目标方法 -- 拦截器的链式调用:
+![proxyChainCall_1](imagePool/annotation-driven/proxyChainCall_1.png)
+![proxyChainCall_2](imagePool/annotation-driven/proxyChainCall_2.png)
