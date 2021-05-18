@@ -170,4 +170,10 @@
 ![AopBasicTestClass](imagePool/annotation-driven/AopBasicTestClass.png)   
 
 
+2. @EnableAspectJAutoProxy 的原理
 
+        a. 向容器中添加AnnotationAwareAspectJAutoProxyCreator组件
+        b. AnnotationAwareAspectJAutoProxyCreator组件对bean进行postProcessAfterInitialization操作
+![AnnotationAwareAspectJAutoProxyCreator](imagePool/annotation-driven/AnnotationAwareAspectJAutoProxyCreator.png)
+        
+        c. 代理对象(proxy)的执行目标方法 -- 拦截器的链式调用:
