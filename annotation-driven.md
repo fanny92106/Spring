@@ -144,6 +144,11 @@
 ![setProfileParameterByAnnotationConstructor](imagePool/annotation-driven/setProfileParameterByAnnotationConstructor.png)
 
 
+12. Summary of Annotation
+
+![annotationSummary](imagePool/annotation-driven/annotationSummary.png)
+
+
 ## AOP
 
 1. basic
@@ -163,3 +168,6 @@
         
         运行测试类
 ![AopBasicTestClass](imagePool/annotation-driven/AopBasicTestClass.png)   
+
+
+
