@@ -230,3 +230,7 @@
         b. 手动发布一个事件:
 ![publishEvent](imagePool/annotation-driven/publishEvent.png)
         
+
+2. 事件监听原理: 
+
+![EventListening](imagePool/annotation-driven/EventListening.png)
