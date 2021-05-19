@@ -179,3 +179,34 @@
         c. 代理对象(proxy)的执行目标方法 -- 拦截器的链式调用:
 ![proxyChainCall_1](imagePool/annotation-driven/proxyChainCall_1.png)
 ![proxyChainCall_2](imagePool/annotation-driven/proxyChainCall_2.png)
+
+
+## BeanFactoryPostProcessor -- Interface
+
+![ImplementBeanDefinitionRegistryPostProcessor](imagePool/annotation-driven/ImplementBeanDefinitionRegistryPostProcessor.png)
+
+1. 定义
+    
+        - beanFactory的后置处理器: 在BeanFactory标准初始化之后调用, 来定制和修改BeanFactory的内容, 
+            所有的bean定义已经保存加载到beanFactory, 但是bean的实例还未创建
+            
+2. 原理
+
+        - 在实例化容器时, 调用invokeBeanFactoryPostProcessors(beanFactory), 来注册所有的beanFactoryPostProcessors
+        - 在初始化创建其他组件之前执行
+        
+## BeanDefinitionRegistryPostProcessor -- BeanFactoryPostProcessor的子接口
+
+![BeanDefinitionRegistryPostProcessorExtends](imagePool/annotation-driven/BeanDefinitionRegistryPostProcessorExtendsBeanFactoryPostProcessor.png)
+![ImplementBeanFactoryPostProcessor](imagePool/annotation-driven/ImplementBeanFactoryPostProcessor.png)
+
+1. 原理
+
+        - postProcessBeanDefinitionRegistry()在所有bean定义信息将要被加载之前, bean实例还未创建时加载
+        - 优先于BeanFactoryPostProcessor执行, 利用BeanDefinitionRegistryPostProcessor给容器中再额外添加一些组件
+        
+2. 执行顺序:
+
+        - 先执行postProcessBeanDefinitionRegistry()方法
+        - 再执行postProcessBeanFactory()方法
+
