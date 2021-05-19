@@ -195,6 +195,7 @@
         - 在实例化容器时, 调用invokeBeanFactoryPostProcessors(beanFactory), 来注册所有的beanFactoryPostProcessors
         - 在初始化创建其他组件之前执行
         
+        
 ## BeanDefinitionRegistryPostProcessor -- BeanFactoryPostProcessor的子接口
 
 ![BeanDefinitionRegistryPostProcessorExtends](imagePool/annotation-driven/BeanDefinitionRegistryPostProcessorExtendsBeanFactoryPostProcessor.png)
@@ -210,3 +211,22 @@
         - 先执行postProcessBeanDefinitionRegistry()方法
         - 再执行postProcessBeanFactory()方法
 
+
+## ApplicationListener<ApplicationEvent>
+
+1. event-driven development:
+
+        a.监听一个事件:
+            1).实现ApplicationListener<ApplicationEvent>接口
+![ImplementApplicationListener](imagePool/annotation-driven/ImplementApplicationListener.png)
+
+                - 写一个监听器来监听某个事件(ApplicationEvent及其子事件)
+                - 把监听器加入到容器中
+                - 只要容器中有相关的时间发布, 就可以监听到这个事件, 调用这个监听器的回调 onApplicationEvent()
+                
+            2).@EventListener 注解在普通组件上
+![EventListenerAnnotation](imagePool/annotation-driven/EventListenerAnnotation.png)
+
+        b. 手动发布一个事件:
+![publishEvent](imagePool/annotation-driven/publishEvent.png)
+        
