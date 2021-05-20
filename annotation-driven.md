@@ -238,14 +238,16 @@
 
 ## IOC容器创建过程
 
-refresh():
+AbstractApplicationContext的 refresh(...):
+![refresh](imagePool/annotation-driven/refresh.png)
 
         1. beanFactory标准初始化
             a. prepareRefresh 创建beanFactory前的预处理
+                - 记录启动时间, 设置容器的active和close状态
                 - initPropertySource() 初始化属性, 覆写子容器自定义属性设置方法
                 - getEnvironment().validateRequiredProperties() 校验环境属性值的合法性
                 - earlyApplicationListeners/ applicationListeners 设置早期事件监听器
-                - earlyApplicationEvents 设置早期事件
+                - earlyApplicationEvents 设置早期事件, 待事件多播器创建后执行
                 
             b. obtainFreshBeanFactory 获取新鲜的beanFactory实例
                 - refreshBeanFactory() 创建beanFactory实例
@@ -263,3 +265,15 @@ refresh():
             
             d. postProcessBeanFactory(beanFactory) beanFactory的后置处理工作
                 - 默认为空, 自定义子类可重写这个方法在beanFactory做进一步的设置
+                
+        2. beanFactory中添加beanFactoryPostProcessors, beanPostProcessors, eventListener, multicaster, 以及创建其他单实例bean
+            a. invokeBeanFactoryPostProcessors 调用beanFactory的后置处理器
+                - BeanFactoryPostProcessor在整个BeanFactory标准初始化完成后进行拦截调用
+                - BeanDefinitionRegistryPostProcessor继承了BeanFactoryPostProcessor, 在beanFactory解析完所有的BeanDefinition后拦截调用
+                - BeanFactoryPostProcessor来源:
+                    * 通过ApplicationContext的addBeanFactoryPostProcessor()方法手动添加自己的拦截器
+                    * 系统默认了一些BeanFactoryPostProcessor, 例如: ConfigurationClassPostProcessor用来处理@Configuration标注的Spring配置类
+                - 调用顺序:
+                    1). 先调用BeanDefinitionRegistryPostProcessor类型的实现了PriorityOrderd, Ordered接口的postProcessors, 然后调用普通的BeanDefinitionRegistryPostProcessor
+                    2). 先调用BeanFactoryPostProcessor类型的实现了PriorityOrderd, Ordered接口的postProcessors, 然后调用普通的BeanFactoryPostProcessor
+            
