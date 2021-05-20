@@ -276,4 +276,17 @@ AbstractApplicationContext的 refresh(...):
                 - 调用顺序:
                     1). 先调用BeanDefinitionRegistryPostProcessor类型的实现了PriorityOrderd, Ordered接口的postProcessors, 然后调用普通的BeanDefinitionRegistryPostProcessor
                     2). 先调用BeanFactoryPostProcessor类型的实现了PriorityOrderd, Ordered接口的postProcessors, 然后调用普通的BeanFactoryPostProcessor
+        
+            b. registerBeanPostProcessors 注册bean的后置处理器
+                - 从beanFactory里获取所有BeanPostProcessor类型的Bean的名称
+                - 调用beanFactory的getBean方法, 并传入每一个BeanPostProcessor类型的Bean名称, 从容器中获取该Bean的实例
+                - 执行顺序:
+                    1). 向beanFacotory注册实现了PriorityOrdered的BeanPostProcessor类型的Bean实例
+                    2). 向beanFactory注册实现了Ordered的BeanPostProcessor类型的Bean实例
+                    3). 向beanFactory注册普通的BeanPostProcessor类型的Bean实例
+                    4). 向beanFactory重新注册实现了MergedBeanDefinitioPostProcessor的BeanPostProcessor类型的Bean实例
+                - 向beanFactory注册BeanPostProcessor的过程就是简单地将实例保存到beanFactory的beanPostProcessor属性中
+                
+            c. 
+            
             
