@@ -234,3 +234,32 @@
 2. 事件监听原理: 
 
 ![EventListening](imagePool/annotation-driven/EventListening.png)
+
+
+## IOC容器创建过程
+
+refresh():
+
+        1. beanFactory标准初始化
+            a. prepareRefresh 创建beanFactory前的预处理
+                - initPropertySource() 初始化属性, 覆写子容器自定义属性设置方法
+                - getEnvironment().validateRequiredProperties() 校验环境属性值的合法性
+                - earlyApplicationListeners/ applicationListeners 设置早期事件监听器
+                - earlyApplicationEvents 设置早期事件
+                
+            b. obtainFreshBeanFactory 获取新鲜的beanFactory实例
+                - refreshBeanFactory() 创建beanFactory实例
+                    a. 创建一个DefaultListableBeanFactory实例
+                    b. beanFactory.setSerializationId() 给工厂设置序列化id
+                - getBeanFactory() 返回所创建的beanFactory实例
+            
+            c. prepareBeanFactory(beanFactor) 创建beanFactory之后的准备工作
+                - 设置beanFactory的类加载器, 表达式解析器等等..
+                - 添加beanPostProcessors后置处理器
+                - 设置忽略的自动装配接口
+                - 注册可解析的组件: beanFactory, resourceLoader, applicationEventPublisher, applicationContext
+                - 添加编译时的AspectJ xxxWeaver
+                - 注册环境/系统变量组件
+            
+            d. postProcessBeanFactory(beanFactory) beanFactory的后置处理工作
+                - 默认为空, 自定义子类可重写这个方法在beanFactory做进一步的设置
