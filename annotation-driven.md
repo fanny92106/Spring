@@ -287,6 +287,20 @@ AbstractApplicationContext的 refresh(...):
                     4). 向beanFactory重新注册实现了MergedBeanDefinitioPostProcessor的BeanPostProcessor类型的Bean实例
                 - 向beanFactory注册BeanPostProcessor的过程就是简单地将实例保存到beanFactory的beanPostProcessor属性中
                 
-            c. 
+            c. initMessageSource 国际化相关功能
+                - 看容器中是否有id为messageSource的,类型是MessageSource的Bean实例. 如果有赋值给messageSource, 如果没有自己创建一个DelegatingMessageSource
+                - 把创建好的MessageSource注册在容器中,以后获取国际化配置文件的值的时候,可以自动注入MessageSource
             
+            d. initApplicationEventMulticaster 初始化事件派发器
+                - 看容中是否有名称为applicationEventMulticaster的, 类型是ApplicationEventMulticaster的Bean实例, 如果没有就创建一个SimpleApplicationEventMulticaster
+                - 把创建好的ApplicationEventMulticaster添加到BeanFactory中
             
+            e. onRefresh 提供给子容器类，供子容器去实例化其他的特殊的Bean
+            
+            f. registerListeners 处理容器中已有的ApplicationListener
+                - 从容器中获得所有的ApplicationListener
+                - 将每个监听器添加到事件派发器(ApplicationEventMulticaster)中
+                - 处理之前步骤产生的事件
+            
+            g. 
+
