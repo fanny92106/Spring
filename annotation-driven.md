@@ -302,5 +302,35 @@ AbstractApplicationContext的 refresh(...):
                 - 将每个监听器添加到事件派发器(ApplicationEventMulticaster)中
                 - 处理之前步骤产生的事件
             
-            g. 
+            g. finishBeanFactoryInitialization 初始化容器中剩余的单实例bean, 拿到剩余的所有的BeanDefinition, 依次调用getBean方法
+            beanFactory.getBean 的执行流程:
+                1). 首先将方法传入的beanName进行转换: 先去除FactoryBean前缀(&符)如果传递的beanName是别名, 则通过别名找到bean的原始名称
+                2). 根据名称先从singletonObjects（一个Map类型的容)获取bean实例,
+                        如果能获取到就先判断该bean实例是否实现了FactoryBean,
+                            如果是FactoryBean类型的bean实例, 就通过FactoryBean获取Bean. 然后直接返回该bean实例. getBean方法结束
+                    如果从singletonObjects没有获取到bean实例就开始创建Bean的过程:
+                        - 首先标记该Bean处于创建状态
+                        - 根据Bean的名称找到BeanDefinition, 查看该Bean是否有前置依赖的Bean, 若有则先创建该Bean前置依赖的Bean
+                        - spring调用AbstractAutowireCapableBeanFactory的createBean方法并传入BeanDefinition开始创建对象, 
+                            先调用resolveBeforeInstantiation给BeanPostProcessor一个机会去返回一个代理对象去替代目标Bean的实例
+                            如果BeanPostProcessor没有返回Bean的代理就通过doCreateBean方法创建对象
+                                # 首先确定Bean的构造函数, 如果有有参构造器, 先自动装配有参构造器, 默认使用无参数构造器
+                                # 选择一个实例化策略去实例化bean, 默认使用CglibSubclassingInstantiationStrategy. 
+                                    该策略模式中,首先判断bean是否有方法被覆盖,如果没有则直接通过反射的方式来创建,
+                                    如果有的话则通过Cglib来实例化bean对象, 把创建好的bean对象包裹在BeanWrapper里
+                                # 调用MergedBeanDefinitionPostProcessor的postProcessMergedBeanDefinition
+                                # 判断容器是否允许循环依赖, 如果允许循环依赖, 就创建一个ObjectFactory类并实现ObjectFactory接口的唯一的一个方法getObject()用于返回Bean
+                                    然后将该ObjectFactory添加到singletonFactories中
+                                # 调用populateBean为bean实例赋值, 在赋值之前执行InstantiationAwareBeanPostProcessor的postProcessAfterInstantiation和postProcessPropertyValues方法 
+                                # 调用initializeBean初始化bean, 如果Bean实现了XXXAware, 就先处理对应的Aware方法, 然后调用beanProcessor的postProcessBeforeInitialization方法
+                                    再以反射的方式调用指定的bean指定的init方法, 最后调用beanProcessor的postProcessAfterInitialization方法
+                                # 调用registerDisposableBeanIfNecessary, 将该bean保存在一个以beanName为key, 以包装了bean引用的DisposableBeanAdapter, 
+                                    在spring容器关闭时, 遍历这个map来获取需要调用bean来依次调用Bean的destroyMethod指定的方法
+                                # 将新创建出来的Bean保存到singletonObjects中
+                                
+![beanCreation](imagePool/annotation-driven/beanCreation.png)
 
+            h. finishRefresh 最后一步
+                - 初始化和生命周期有关的后置处理器LifecycleProcessor, 如果容器中没有指定处理就创建一个DefaultLifecycleProcessor加入到容器
+                - 获取容器中所有的LifecycleProcessor回调onRefresh()方法
+                - 发布容器刷新完成事件ContextRefreshedEvent
