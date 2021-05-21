@@ -1,6 +1,6 @@
 # Annotation-driven Spring Development
 
-## 容器注入bean
+## ioc容器注入bean
 
 
 1. @Configuration, @Bean, AnnotationConfigApplicationContext
@@ -334,3 +334,30 @@ AbstractApplicationContext的 refresh(...):
                 - 初始化和生命周期有关的后置处理器LifecycleProcessor, 如果容器中没有指定处理就创建一个DefaultLifecycleProcessor加入到容器
                 - 获取容器中所有的LifecycleProcessor回调onRefresh()方法
                 - 发布容器刷新完成事件ContextRefreshedEvent
+
+
+## 整合SpringMVC  -- annotation
+
+1. 原理:
+
+        a. web容器在启动时, 会扫描每个classpath中每个jar包下的META-INF/services/javax.servlet.ServletContainerInitializer文件
+        b. 加载这个文件指定的类SpringServletContainerInitializer
+        c. spring的应用一启动会加载感性的WebApplicationInitializer接口下的所有组件
+        d. 为WebApplicationInitializer组件创建对象:
+![WebApplicationInitializerHierarchy](imagePool/annotation-driven/WebApplicationInitializerHierarchy.png)
+    
+            1). AbstractContextLoaderInitializer: 
+                 - createRootApplicationContext() 创建根容器 
+            2). AbstractDispatcherServletInitializer:
+                 - createServletApplicationContext() 创建web的ioc容器
+                 - createDispatcherServlet() 创建一个DispatcherServlet对象
+                 - 将创建的DispatcherServlet添加到ServletContext中, getServletMappings() 配置servletMapping
+            3). AbstractAnnotationConfigDispatcherServletInitializer: 
+                (以注解的方式配置DispatcherServlet初始化器)
+                 - createRootApplicationContext() 创建根容器
+                    getRootConfigClasses() 获取spring的配置类
+                 - createServletApplicationContext() 创建web的ioc容器
+                    getServletConfigClasses() 获取spring-mvc的配置类
+
+![AbstractAnnotationConfigDispatcherServletInitialiizer](imagePool/annotation-driven/AbstractAnnotationConfigDispatcherServletInitialiizer.png)
+                    
