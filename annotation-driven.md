@@ -360,4 +360,20 @@ AbstractApplicationContext的 refresh(...):
                     getServletConfigClasses() 获取spring-mvc的配置类
 
 ![AbstractAnnotationConfigDispatcherServletInitialiizer](imagePool/annotation-driven/AbstractAnnotationConfigDispatcherServletInitialiizer.png)
-                    
+    
+    
+2. 实现
+        
+        - 项目结构 
+![projectStructure](imagePool/annotation-driven/projectStructure.png)
+
+        - MyWebApplicationInitializer类指定配之类(spring, spring-mvc)和DispatcherServlet mapping
+![ConfigConfigFiles](imagePool/annotation-driven/ConfigConfigFiles.png)
+
+        - AppConfig配置spring容器, WebConfig配置spring-mvc容器
+![AppConfig](imagePool/annotation-driven/AppConfig.png)
+![WebConfig](imagePool/annotation-driven/WebConfig.png)
+        
+        - 添加controller和service
+![TestController](imagePool/annotation-driven/TestController.png)
+![TestService](imagePool/annotation-driven/TestService.png)
