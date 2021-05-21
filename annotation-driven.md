@@ -377,3 +377,8 @@ AbstractApplicationContext的 refresh(...):
         - 添加controller和service
 ![TestController](imagePool/annotation-driven/TestController.png)
 ![TestService](imagePool/annotation-driven/TestService.png)
+
+
+3. 定制springMVC (viewResolver, default servlet, interceptor)
+
+![springMVCConfigAnnotation](imagePool/annotation-driven/springMVCConfigAnnotation.png)
