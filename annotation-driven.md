@@ -382,3 +382,19 @@ AbstractApplicationContext的 refresh(...):
 3. 定制springMVC (viewResolver, default servlet, interceptor)
 
 ![springMVCConfigAnnotation](imagePool/annotation-driven/springMVCConfigAnnotation.png)
+
+
+## Async Servlet
+
+1. 返回Callable对象完成异步处理
+
+![AsyncController](imagePool/annotation-driven/AsyncController.png)
+
+    原理:
+        1). 控制器返回Callable
+        2). Spring异步处理, 将Callable提交到TaskExecutor, 使用一个隔离的线程进行执行
+        3). DispatcherServlet和所有的Filter退出web容器的线程, 但response保持打开状态
+        4). Callable返回结果, SpringMVC将请求重新派发给容器, 恢复之前的处理
+        5). 根据Callable返回的结果, SpringMVC继续进行视图渲染等流程
+
+2. 
