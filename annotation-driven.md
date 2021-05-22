@@ -397,4 +397,9 @@ AbstractApplicationContext的 refresh(...):
         4). Callable返回结果, SpringMVC将请求重新派发给容器, 恢复之前的处理
         5). 根据Callable返回的结果, SpringMVC继续进行视图渲染等流程
 
-2. 
+
+2. 使用DeferredResult<Object>模拟消息队列消费异步处理请求
+
+![MimicMessageQueue](imagePool/annotation-driven/MimicMessageQueue.png)
+    
+![AsyncHandleCreateOrder](imagePool/annotation-driven/AsyncHandleCreateOrder.png)
