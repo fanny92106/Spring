@@ -63,7 +63,13 @@
 ![manualRegisterBean](imagePool/annotation-driven/manualRegisterBean.png)
 
 
-6. FactoryBean<T>
+6. @ImportResource(Beans.xml)
+
+        - 在基于注解的spring容器中注册(老式的)xml配置注册的<Bean>
+![ImportResource](imagePool/annotation-driven/ImportResource.png)
+
+
+7. FactoryBean<T>
 
         - 容器中的bean是getObject()返回的对象, 虽然在配置文件注册的是FactoryBean
         - 若想获取FactoryBean对象本身, 添加&符号
@@ -79,7 +85,7 @@
 ![getFactoryBean](imagePool/annotation-driven/getFactoryBean.png)
 
 
-7. @Bean Life Cycle Methods
+8. @Bean Life Cycle Methods
 
         method_1: @Bean(initMethod, destroyMethod)
 ![beanLifeCycleMethod](imagePool/annotation-driven/beanAnnotationLifeCycleMethod.png)
@@ -98,7 +104,7 @@
 ![beanPostProcessor](imagePool/annotation-driven/beanPostProcessor.png)
 
 
-8. @Value, @PropertySource
+9. @Value, @PropertySource
     
         - 基本数值
         - SpEL: #{} spring expression
@@ -114,7 +120,7 @@
 ![valueAnnotation](imagePool/annotation-driven/valueAnnotation.png)
 
 
-9. @Autowired, @Resource, @Inject
+10. @Autowired, @Resource, @Inject
         
         三个注解都支持自动装配:
             - @Autowired: 由Spring定义, 首选
@@ -123,14 +129,14 @@
             - @Inject: 由java定义, 需要导入javax.injext包, 不支持require=false选项
             
 
-10. xxxAware
+11. xxxAware
 
         - 自定义组件想要注入Spring容器底层的一些组件(ApplicationContext, BeanFactory, xxx);
             自定义组件实现xxxAware接口, 在创建对象的时候, 会调用接口规定的方法注入相关组件
 ![implementXxxAware](imagePool/annotation-driven/implementXxxAware)
 
 
-11. @Profile
+12. @Profile
 
         - 根据当前的环境动态地切换一系列组件的功能, eg: dev, test, prod
         
@@ -144,7 +150,7 @@
 ![setProfileParameterByAnnotationConstructor](imagePool/annotation-driven/setProfileParameterByAnnotationConstructor.png)
 
 
-12. Summary of Annotation
+13. Summary of Annotation
 
 ![annotationSummary](imagePool/annotation-driven/annotationSummary.png)
 
